@@ -1,0 +1,500 @@
+
+Analog_Digital_Wandler.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000025e  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000035  00800100  00800100  000002d2  2**0
+                  ALLOC
+  2 .comment      00000030  00000000  00000000  000002d2  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 000000a0  00000000  00000000  00000302  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   000004aa  00000000  00000000  000003a2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 00000334  00000000  00000000  0000084c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000003ca  00000000  00000000  00000b80  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000144  00000000  00000000  00000f4c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000002d4  00000000  00000000  00001090  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000002e6  00000000  00000000  00001364  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000088  00000000  00000000  0000164a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 ea 00 	jmp	0x1d4	; 0x1d4 <__vector_18>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a5 33       	cpi	r26, 0x35	; 53
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 99 00 	call	0x132	; 0x132 <main>
+  88:	0c 94 2d 01 	jmp	0x25a	; 0x25a <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <initADC>:
+void initADC(void)
+{
+	unsigned int result;
+	
+	// Einstellen der AD-Wandler Referenzspannung auf 5V mit externem Kondensator an AREF
+	ADMUX |= (1<<REFS0);
+  90:	ec e7       	ldi	r30, 0x7C	; 124
+  92:	f0 e0       	ldi	r31, 0x00	; 0
+  94:	80 81       	ld	r24, Z
+  96:	80 64       	ori	r24, 0x40	; 64
+  98:	80 83       	st	Z, r24
+	
+	// Wählen des Vorteilers
+	ADCSRA |= (1<<ADPS0) | (1<<ADPS2);
+  9a:	ea e7       	ldi	r30, 0x7A	; 122
+  9c:	f0 e0       	ldi	r31, 0x00	; 0
+  9e:	80 81       	ld	r24, Z
+  a0:	85 60       	ori	r24, 0x05	; 5
+  a2:	80 83       	st	Z, r24
+	
+	// Freigeben des AD-Wandlers
+	ADCSRA |= (1<<ADEN);
+  a4:	80 81       	ld	r24, Z
+  a6:	80 68       	ori	r24, 0x80	; 128
+  a8:	80 83       	st	Z, r24
+
+	// Dummy-Wandlungen ausführen und verwerfen
+	ADCSRA |= (1<<ADSC);
+  aa:	80 81       	ld	r24, Z
+  ac:	80 64       	ori	r24, 0x40	; 64
+  ae:	80 83       	st	Z, r24
+	while(ADCSRA & (1<<ADSC));
+  b0:	80 81       	ld	r24, Z
+  b2:	86 fd       	sbrc	r24, 6
+  b4:	fd cf       	rjmp	.-6      	; 0xb0 <initADC+0x20>
+	result = ADC;
+  b6:	80 91 78 00 	lds	r24, 0x0078
+  ba:	90 91 79 00 	lds	r25, 0x0079
+  be:	08 95       	ret
+
+000000c0 <ADC_convert>:
+
+unsigned int ADC_convert(unsigned char port) {
+	unsigned int conversion;
+	
+	// zurücksetzen des Multiplexers
+	ADMUX = 0x00;
+  c0:	10 92 7c 00 	sts	0x007C, r1
+	
+	// Auswahl des jeweiligen AD-Wandler Anschlusses
+	switch (port)
+  c4:	83 30       	cpi	r24, 0x03	; 3
+  c6:	a1 f0       	breq	.+40     	; 0xf0 <ADC_convert+0x30>
+  c8:	28 f4       	brcc	.+10     	; 0xd4 <ADC_convert+0x14>
+  ca:	81 30       	cpi	r24, 0x01	; 1
+  cc:	49 f0       	breq	.+18     	; 0xe0 <ADC_convert+0x20>
+  ce:	82 30       	cpi	r24, 0x02	; 2
+  d0:	59 f0       	breq	.+22     	; 0xe8 <ADC_convert+0x28>
+  d2:	1d c0       	rjmp	.+58     	; 0x10e <ADC_convert+0x4e>
+  d4:	85 30       	cpi	r24, 0x05	; 5
+  d6:	a1 f0       	breq	.+40     	; 0x100 <ADC_convert+0x40>
+  d8:	78 f0       	brcs	.+30     	; 0xf8 <ADC_convert+0x38>
+  da:	87 30       	cpi	r24, 0x07	; 7
+  dc:	a9 f0       	breq	.+42     	; 0x108 <ADC_convert+0x48>
+  de:	17 c0       	rjmp	.+46     	; 0x10e <ADC_convert+0x4e>
+		// Zur besseren Übersicht können die Hexadezimalzahlen auch in binäre Werte umgerechnet werden
+		
+		case 0x01: {
+			
+			// 0x01 = 0b00000001
+			ADMUX = 0x01;	
+  e0:	81 e0       	ldi	r24, 0x01	; 1
+  e2:	80 93 7c 00 	sts	0x007C, r24
+			}
+		break;
+  e6:	13 c0       	rjmp	.+38     	; 0x10e <ADC_convert+0x4e>
+
+		case 0x02: {
+			ADMUX = 0x02;
+  e8:	82 e0       	ldi	r24, 0x02	; 2
+  ea:	80 93 7c 00 	sts	0x007C, r24
+			}
+		break;
+  ee:	0f c0       	rjmp	.+30     	; 0x10e <ADC_convert+0x4e>
+
+		case 0x03: {
+			ADMUX = 0x03;
+  f0:	83 e0       	ldi	r24, 0x03	; 3
+  f2:	80 93 7c 00 	sts	0x007C, r24
+			}
+		break;
+  f6:	0b c0       	rjmp	.+22     	; 0x10e <ADC_convert+0x4e>
+
+		case 0x04: {
+			ADMUX = 0x04;
+  f8:	84 e0       	ldi	r24, 0x04	; 4
+  fa:	80 93 7c 00 	sts	0x007C, r24
+			}
+		break;
+  fe:	07 c0       	rjmp	.+14     	; 0x10e <ADC_convert+0x4e>
+
+		case 0x05: {
+			ADMUX = 0x05;
+ 100:	85 e0       	ldi	r24, 0x05	; 5
+ 102:	80 93 7c 00 	sts	0x007C, r24
+			}
+		break;
+ 106:	03 c0       	rjmp	.+6      	; 0x10e <ADC_convert+0x4e>
+
+		case 0x07: {
+			ADMUX = 0x07;
+ 108:	87 e0       	ldi	r24, 0x07	; 7
+ 10a:	80 93 7c 00 	sts	0x007C, r24
+
+	}
+	
+	// Setzen der Referenzspannung
+	// Bei einer Referenzspannungsänderung muss auch hier der Wert angepasst werden
+	ADMUX |= (1<<REFS0);
+ 10e:	ec e7       	ldi	r30, 0x7C	; 124
+ 110:	f0 e0       	ldi	r31, 0x00	; 0
+ 112:	80 81       	ld	r24, Z
+ 114:	80 64       	ori	r24, 0x40	; 64
+ 116:	80 83       	st	Z, r24
+	
+	// Wandlung ausführen
+	ADCSRA |= (1<<ADSC);
+ 118:	ea e7       	ldi	r30, 0x7A	; 122
+ 11a:	f0 e0       	ldi	r31, 0x00	; 0
+ 11c:	80 81       	ld	r24, Z
+ 11e:	80 64       	ori	r24, 0x40	; 64
+ 120:	80 83       	st	Z, r24
+	// warten, bis die Wandlung beendet ist
+	while (ADCSRA & (1<<ADSC));
+ 122:	80 81       	ld	r24, Z
+ 124:	86 fd       	sbrc	r24, 6
+ 126:	fd cf       	rjmp	.-6      	; 0x122 <ADC_convert+0x62>
+	
+	// Auslesen des gewandelten Wertes und speichern in "conversation"
+	conversion = ADC;
+ 128:	80 91 78 00 	lds	r24, 0x0078
+ 12c:	90 91 79 00 	lds	r25, 0x0079
+	return conversion;
+}
+ 130:	08 95       	ret
+
+00000132 <main>:
+
+int main(void)
+{
+	
+	// Initialisieren des Analog-Digital-Wandlers
+	initADC();
+ 132:	0e 94 48 00 	call	0x90	; 0x90 <initADC>
+	
+	// Initialisieren der seriellen Schnittstelle
+	initUSART();
+ 136:	0e 94 b0 00 	call	0x160	; 0x160 <initUSART>
+	unsigned int ADC_value = 0;
+	
+    while(1)
+    {
+		// Analog-to-Digital Wandlung an AKKU ausführen und den Wert in ADC_value laden
+		ADC_value = ADC_convert(ADC1);
+ 13a:	81 e0       	ldi	r24, 0x01	; 1
+ 13c:	0e 94 60 00 	call	0xc0	; 0xc0 <ADC_convert>
+		// Senden des AD-Wertes über die serielle schnittstelle
+		// Da der AD-Wert die größe von 10 Bit hat, muss er aufgespalten werden und zuerst die oberen 
+		// und anschließend die unteren 8 Bit gesendet werden
+		//ADC_value *= 5.0 / 512 * 2.54;
+		//sendByte(ADC_value>>8); // Senden des HIGH-Byte (obere 8 Bit)
+		sendByte(ADC_value>>2);	// Senden des LOW-Byte	(untere 8 Bit)
+ 140:	96 95       	lsr	r25
+ 142:	87 95       	ror	r24
+ 144:	96 95       	lsr	r25
+ 146:	87 95       	ror	r24
+ 148:	0e 94 25 01 	call	0x24a	; 0x24a <sendByte>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 14c:	2f ef       	ldi	r18, 0xFF	; 255
+ 14e:	83 ed       	ldi	r24, 0xD3	; 211
+ 150:	90 e3       	ldi	r25, 0x30	; 48
+ 152:	21 50       	subi	r18, 0x01	; 1
+ 154:	80 40       	sbci	r24, 0x00	; 0
+ 156:	90 40       	sbci	r25, 0x00	; 0
+ 158:	e1 f7       	brne	.-8      	; 0x152 <main+0x20>
+ 15a:	00 c0       	rjmp	.+0      	; 0x15c <main+0x2a>
+ 15c:	00 00       	nop
+ 15e:	ed cf       	rjmp	.-38     	; 0x13a <main+0x8>
+
+00000160 <initUSART>:
+//counts the time after the last successful communication
+uint8_t timeout = 0;
+
+void initUSART(void) {
+	//Set baud rate
+	UBRR0H = (unsigned char)(MYUBRR >> 8);
+ 160:	10 92 c5 00 	sts	0x00C5, r1
+	UBRR0L = (unsigned char)MYUBRR;
+ 164:	87 e6       	ldi	r24, 0x67	; 103
+ 166:	80 93 c4 00 	sts	0x00C4, r24
+	
+	//Enable receiver and transmitter as well as the receiver interrupt
+	UCSR0B = (1 << RXCIE0)|(1 << RXEN0)|(1 << TXEN0);
+ 16a:	88 e9       	ldi	r24, 0x98	; 152
+ 16c:	80 93 c1 00 	sts	0x00C1, r24
+	
+	// Set frame format to 8data and 1stop bit
+	UCSR0C = (1 << UCSZ00)|(1 << UCSZ01);
+ 170:	86 e0       	ldi	r24, 0x06	; 6
+ 172:	80 93 c2 00 	sts	0x00C2, r24
+	sei();
+ 176:	78 94       	sei
+ 178:	08 95       	ret
+
+0000017a <checkStream>:
+void checkStream() {
+	//initialized checksum byte
+	uint8_t checksum = 0x00;
+	
+	//copy length of stream buffer
+	uint8_t streamBufSize = streamBuf;
+ 17a:	50 91 01 01 	lds	r21, 0x0101
+	
+	//ignore checksum byte for checksum building
+	streamBuf--;
+ 17e:	2f ef       	ldi	r18, 0xFF	; 255
+ 180:	25 0f       	add	r18, r21
+ 182:	20 93 01 01 	sts	0x0101, r18
+	
+	//iterate through all new bytes
+	for(; streamBuf > 0; streamBuf--) {
+ 186:	22 23       	and	r18, r18
+ 188:	89 f0       	breq	.+34     	; 0x1ac <checkStream+0x32>
+		
+		//XOR every new byte together
+		checksum ^= stream[streamLength + streamBuf - 1];
+ 18a:	80 91 02 01 	lds	r24, 0x0102
+ 18e:	90 e0       	ldi	r25, 0x00	; 0
+}
+
+//"private" function, checks the checksum
+void checkStream() {
+	//initialized checksum byte
+	uint8_t checksum = 0x00;
+ 190:	30 e0       	ldi	r19, 0x00	; 0
+	
+	//iterate through all new bytes
+	for(; streamBuf > 0; streamBuf--) {
+		
+		//XOR every new byte together
+		checksum ^= stream[streamLength + streamBuf - 1];
+ 192:	8d 5f       	subi	r24, 0xFD	; 253
+ 194:	9e 4f       	sbci	r25, 0xFE	; 254
+ 196:	fc 01       	movw	r30, r24
+ 198:	e2 0f       	add	r30, r18
+ 19a:	f1 1d       	adc	r31, r1
+ 19c:	31 97       	sbiw	r30, 0x01	; 1
+ 19e:	40 81       	ld	r20, Z
+ 1a0:	34 27       	eor	r19, r20
+	
+	//ignore checksum byte for checksum building
+	streamBuf--;
+	
+	//iterate through all new bytes
+	for(; streamBuf > 0; streamBuf--) {
+ 1a2:	21 50       	subi	r18, 0x01	; 1
+ 1a4:	c1 f7       	brne	.-16     	; 0x196 <checkStream+0x1c>
+ 1a6:	10 92 01 01 	sts	0x0101, r1
+ 1aa:	01 c0       	rjmp	.+2      	; 0x1ae <checkStream+0x34>
+}
+
+//"private" function, checks the checksum
+void checkStream() {
+	//initialized checksum byte
+	uint8_t checksum = 0x00;
+ 1ac:	30 e0       	ldi	r19, 0x00	; 0
+		//XOR every new byte together
+		checksum ^= stream[streamLength + streamBuf - 1];
+	}
+	
+	//check whether calculated checksum equals received checksum
+	if(checksum == stream[streamLength + streamBufSize - 1]) {
+ 1ae:	80 91 02 01 	lds	r24, 0x0102
+ 1b2:	e8 2f       	mov	r30, r24
+ 1b4:	f0 e0       	ldi	r31, 0x00	; 0
+ 1b6:	ed 5f       	subi	r30, 0xFD	; 253
+ 1b8:	fe 4f       	sbci	r31, 0xFE	; 254
+ 1ba:	e5 0f       	add	r30, r21
+ 1bc:	f1 1d       	adc	r31, r1
+ 1be:	31 97       	sbiw	r30, 0x01	; 1
+ 1c0:	90 81       	ld	r25, Z
+ 1c2:	93 13       	cpse	r25, r19
+ 1c4:	06 c0       	rjmp	.+12     	; 0x1d2 <checkStream+0x58>
+		
+		//add new bytes to rest of stream without checksum byte
+		streamLength += streamBufSize - 1;
+ 1c6:	85 0f       	add	r24, r21
+ 1c8:	81 50       	subi	r24, 0x01	; 1
+ 1ca:	80 93 02 01 	sts	0x0102, r24
+		
+		//reset timeout
+		timeout = 0;
+ 1ce:	10 92 00 01 	sts	0x0100, r1
+ 1d2:	08 95       	ret
+
+000001d4 <__vector_18>:
+}
+
+//This timer interrupt handles each byte received. It is triggered when there is a new byte
+//available in the UDR register. The interrupt is enabled by setting the byte RXCIEn in
+//register UCSRnB to 1.
+ISR(USART_RX_vect) {
+ 1d4:	1f 92       	push	r1
+ 1d6:	0f 92       	push	r0
+ 1d8:	0f b6       	in	r0, 0x3f	; 63
+ 1da:	0f 92       	push	r0
+ 1dc:	11 24       	eor	r1, r1
+ 1de:	2f 93       	push	r18
+ 1e0:	3f 93       	push	r19
+ 1e2:	4f 93       	push	r20
+ 1e4:	5f 93       	push	r21
+ 1e6:	6f 93       	push	r22
+ 1e8:	7f 93       	push	r23
+ 1ea:	8f 93       	push	r24
+ 1ec:	9f 93       	push	r25
+ 1ee:	af 93       	push	r26
+ 1f0:	bf 93       	push	r27
+ 1f2:	ef 93       	push	r30
+ 1f4:	ff 93       	push	r31
+	//read the receive register into a buffer
+	uint8_t buf = UDR0;
+ 1f6:	40 91 c6 00 	lds	r20, 0x00C6
+	
+	//check whether stream reached it's end
+	if(buf == CMD_END) {
+ 1fa:	41 11       	cpse	r20, r1
+ 1fc:	03 c0       	rjmp	.+6      	; 0x204 <__vector_18+0x30>
+		
+		//execute a checksum check
+		checkStream();
+ 1fe:	0e 94 bd 00 	call	0x17a	; 0x17a <checkStream>
+ 202:	12 c0       	rjmp	.+36     	; 0x228 <__vector_18+0x54>
+		
+	//check for overflow of buffer array
+	} else if(streamLength + streamBuf < MAX_COMMANDS) {
+ 204:	80 91 02 01 	lds	r24, 0x0102
+ 208:	90 e0       	ldi	r25, 0x00	; 0
+ 20a:	50 91 01 01 	lds	r21, 0x0101
+ 20e:	9c 01       	movw	r18, r24
+ 210:	25 0f       	add	r18, r21
+ 212:	31 1d       	adc	r19, r1
+ 214:	22 33       	cpi	r18, 0x32	; 50
+ 216:	31 05       	cpc	r19, r1
+ 218:	3c f4       	brge	.+14     	; 0x228 <__vector_18+0x54>
+		
+		//add new byte to stream buffer
+		stream[streamLength] = buf;
+ 21a:	fc 01       	movw	r30, r24
+ 21c:	ed 5f       	subi	r30, 0xFD	; 253
+ 21e:	fe 4f       	sbci	r31, 0xFE	; 254
+ 220:	40 83       	st	Z, r20
+		
+		//increase size index of stream buffer
+		streamBuf++;
+ 222:	5f 5f       	subi	r21, 0xFF	; 255
+ 224:	50 93 01 01 	sts	0x0101, r21
+	}
+}
+ 228:	ff 91       	pop	r31
+ 22a:	ef 91       	pop	r30
+ 22c:	bf 91       	pop	r27
+ 22e:	af 91       	pop	r26
+ 230:	9f 91       	pop	r25
+ 232:	8f 91       	pop	r24
+ 234:	7f 91       	pop	r23
+ 236:	6f 91       	pop	r22
+ 238:	5f 91       	pop	r21
+ 23a:	4f 91       	pop	r20
+ 23c:	3f 91       	pop	r19
+ 23e:	2f 91       	pop	r18
+ 240:	0f 90       	pop	r0
+ 242:	0f be       	out	0x3f, r0	; 63
+ 244:	0f 90       	pop	r0
+ 246:	1f 90       	pop	r1
+ 248:	18 95       	reti
+
+0000024a <sendByte>:
+
+//This function sends a single byte. What's there more to explain?
+//THIS IS A BLOCKING FUNCTION and can take up to a few ms to finish!
+void sendByte(unsigned char byte) {
+	//wait until register is ready to accept next byte
+	while ((UCSR0A & (1 << UDRE0)) == 0) {};
+ 24a:	e0 ec       	ldi	r30, 0xC0	; 192
+ 24c:	f0 e0       	ldi	r31, 0x00	; 0
+ 24e:	90 81       	ld	r25, Z
+ 250:	95 ff       	sbrs	r25, 5
+ 252:	fd cf       	rjmp	.-6      	; 0x24e <sendByte+0x4>
+		
+	//write byte into transmit register
+	UDR0 = byte;
+ 254:	80 93 c6 00 	sts	0x00C6, r24
+ 258:	08 95       	ret
+
+0000025a <_exit>:
+ 25a:	f8 94       	cli
+
+0000025c <__stop_program>:
+ 25c:	ff cf       	rjmp	.-2      	; 0x25c <__stop_program>
